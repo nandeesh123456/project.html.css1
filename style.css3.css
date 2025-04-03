@@ -1,0 +1,54 @@
+/* Universal reset for all elements */
+* {
+    margin: 0; /* Removes default margin */
+    padding: 0; /* Removes default padding */
+    box-sizing: border-box; /* Ensures padding and border don't affect the total width/height */
+  }
+  
+  /* Body styling */
+  body {
+    display: flex; /* Using flexbox to center content */
+    justify-content: center; /* Horizontally centers content */
+    align-items: center; /* Vertically centers content */
+    height: 100vh; /* Ensures the body takes up the full viewport height */
+    background: #000; /* Black background */
+    overflow: hidden; /* Hides any overflow, ensuring no scrollbars */
+  }
+  
+  /* Container for positioning the circles */
+  .container {
+    position: absolute; /* Absolute positioning relative to the body */
+    top: 20%; /* Positions container 20% from the top of the viewport */
+    height: 90%; /* The container takes up 90% of the viewport's height */
+    display: flex; /* Flexbox to center the contents inside */
+    justify-content: center; /* Horizontally centers content inside the container */
+    align-items: center; /* Vertically centers content inside the container */
+  }
+  
+  /* Styling for each circle */
+  .circle {
+    position: absolute; /* Absolute positioning for each circle */
+    background: transparent; /* Transparent background for the circles */
+    width: calc(var(--i) * 2.5vmin); /* Dynamically calculates the width based on a CSS variable (--i) */
+    aspect-ratio: 1; /* Ensures the width and height are always equal, making it a perfect circle */
+    border-radius: 20%; /* Makes the element round */
+    border: 3px solid rgb(0, 255, 13); /* Green border with 3px thickness */
+    transform-style: preserve-3d; /* Ensures 3D transforms are applied to children elements (if any) */
+    transform: rotateX(70deg) translateZ(50px); /* Applies a 3D rotation and translation */
+    animation: animate 3s ease-in-out calc(var(--i) * 0.08s) infinite; /* Animates the circle with a delay based on --i */
+    box-shadow: 0 0 15px rgb(113, 36, 36), /* Outer shadow around the circle */
+                inset 0 0 15px rgb(208, 16, 186); /* Inner shadow for a glowing effect */
+  }
+  
+  /* Keyframes for the circle animation */
+  @keyframes animate {
+    0%, 100% {
+      transform: rotateX(70deg) translateZ(50px) translateY(0); /* At the start and end, the circle remains in place with a rotation */
+      filter: hue-rotate(0); /* No hue rotation at the start and end */
+    }
+  
+    50% {
+      transform: rotateX(70deg) translateZ(50px) translateY(-50vmin); /* Moves the circle up at the halfway point */
+      filter: hue-rotate(360deg); /* Fully rotates the hue color at the halfway point */
+    }
+  }
